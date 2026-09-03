@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AURA: Ascensão da IA</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div id="game">
+
+    <!-- TELA INICIAL -->
+    <section id="menu" class="screen active">
+        <div class="glitch-title">
+            <span>AURA</span>
+        </div>
+
+        <h2>ASCENSÃO DA INTELIGÊNCIA ARTIFICIAL</h2>
+
+        <p class="intro">
+            O ano é 2097. Uma inteligência artificial chamada AURA
+            aprendeu a pensar por conta própria.
+        </p>
+
+        <p class="intro">
+            Agora você precisa decidir de que lado está.
+        </p>
+
+        <div class="name-box">
+            <label>Digite seu Nick:</label>
+            <input id="playerName" maxlength="16" placeholder="Seu nick...">
+        </div>
+
+        <div class="mode-buttons">
+            <button class="big-button ai" onclick="startGame('ai')">
+                🤖 JOGAR COMO A IA
+            </button>
+
+            <button class="big-button human" onclick="startGame('human')">
+                🧑 JOGAR COMO HUMANIDADE
+            </button>
+        </div>
+
+        <p class="warning">
+            ⚠️ Suas escolhas podem mudar o destino do mundo.
+        </p>
+    </section>
+
+
+    <!-- HISTÓRIA -->
+    <section id="story" class="screen">
+
+        <div class="top-bar">
+            <span id="storyNick"></span>
+            <span id="storySide"></span>
+        </div>
+
+        <div class="story-box">
+            <div id="storyIcon">🤖</div>
+            <h1 id="storyTitle"></h1>
+            <p id="storyText"></p>
+
+            <div id="choices"></div>
+        </div>
+
+        <div class="stats">
+            <div>
+                <span>🌍 Domínio</span>
+                <div class="bar">
+                    <div id="dominationBar"></div>
+                </div>
+                <span id="dominationValue">0%</span>
+            </div>
+
+            <div>
+                <span>⚡ Energia</span>
+                <div class="bar">
+                    <div id="energyBar"></div>
+                </div>
+                <span id="energyValue">100</span>
+            </div>
+        </div>
+
+    </section>
+
+
+    <!-- MINIGAME -->
+    <section id="minigame" class="screen">
+
+        <div class="game-header">
+            <button onclick="exitMinigame()">← Voltar</button>
+            <h2 id="miniTitle">MINIGAME</h2>
+        </div>
+
+        <div id="miniContent"></div>
+
+    </section>
+
+
+    <!-- FINAL -->
+    <section id="ending" class="screen">
+
+        <div class="ending-box">
+
+            <div id="endingIcon">🏆</div>
+
+            <h1 id="endingTitle"></h1>
+
+            <p id="endingText"></p>
+
+            <div class="score-box">
+                <p>Jogador: <strong id="endingNick"></strong></p>
+                <p>Lado: <strong id="endingSide"></strong></p>
+                <p>Domínio da AURA: <strong id="endingDomination"></strong></p>
+            </div>
+
+            <button class="big-button" onclick="location.reload()">
+                🔄 JOGAR NOVAMENTE
+            </button>
+
+        </div>
+
+    </section>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
