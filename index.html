@@ -1,132 +1,229 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AURA: Ascensão da IA</title>
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>NEON CITY</title>
+
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<div id="game">
+    <!-- =========================
+         MENU
+    ========================== -->
 
-    <!-- TELA INICIAL -->
-    <section id="menu" class="screen active">
-        <div class="glitch-title">
-            <span>AURA</span>
+    <div id="menu">
+
+        <div class="logo">
+            NEON
+            <span>CITY</span>
         </div>
 
-        <h2>ASCENSÃO DA INTELIGÊNCIA ARTIFICIAL</h2>
-
-        <p class="intro">
-            O ano é 2097. Uma inteligência artificial chamada AURA
-            aprendeu a pensar por conta própria.
+        <p class="subtitle">
+            OPEN WORLD
         </p>
 
-        <p class="intro">
-            Agora você precisa decidir de que lado está.
-        </p>
+        <button id="startGame">
+            ENTRAR NA CIDADE
+        </button>
 
-        <div class="name-box">
-            <label>Digite seu Nick:</label>
-            <input id="playerName" maxlength="16" placeholder="Seu nick...">
+        <button id="continueGame">
+            CONTINUAR
+        </button>
+
+        <div class="controls">
+
+            <p>
+                <b>WASD</b> — movimentar
+            </p>
+
+            <p>
+                <b>SHIFT</b> — correr
+            </p>
+
+            <p>
+                <b>E</b> — entrar/sair do veículo
+            </p>
+
+            <p>
+                <b>F</b> — missão
+            </p>
+
+            <p>
+                <b>ESC</b> — pausa
+            </p>
+
         </div>
 
-        <div class="mode-buttons">
-            <button class="big-button ai" onclick="startGame('ai')">
-                🤖 JOGAR COMO A IA
-            </button>
-
-            <button class="big-button human" onclick="startGame('human')">
-                🧑 JOGAR COMO HUMANIDADE
-            </button>
-        </div>
-
-        <p class="warning">
-            ⚠️ Suas escolhas podem mudar o destino do mundo.
-        </p>
-    </section>
+    </div>
 
 
-    <!-- HISTÓRIA -->
-    <section id="story" class="screen">
+    <!-- =========================
+         JOGO
+    ========================== -->
 
-        <div class="top-bar">
-            <span id="storyNick"></span>
-            <span id="storySide"></span>
-        </div>
+    <canvas id="gameCanvas"></canvas>
 
-        <div class="story-box">
-            <div id="storyIcon">🤖</div>
-            <h1 id="storyTitle"></h1>
-            <p id="storyText"></p>
 
-            <div id="choices"></div>
-        </div>
+    <!-- =========================
+         HUD
+    ========================== -->
 
-        <div class="stats">
-            <div>
-                <span>🌍 Domínio</span>
-                <div class="bar">
-                    <div id="dominationBar"></div>
+    <div id="hud">
+
+        <div class="hud-left">
+
+            <div class="player-card">
+
+                <div class="avatar">
+                    N
                 </div>
-                <span id="dominationValue">0%</span>
-            </div>
 
-            <div>
-                <span>⚡ Energia</span>
-                <div class="bar">
-                    <div id="energyBar"></div>
+                <div>
+                    <strong>PLAYER</strong>
+                    <span id="playerName">
+                        NEO
+                    </span>
                 </div>
-                <span id="energyValue">100</span>
-            </div>
-        </div>
 
-    </section>
-
-
-    <!-- MINIGAME -->
-    <section id="minigame" class="screen">
-
-        <div class="game-header">
-            <button onclick="exitMinigame()">← Voltar</button>
-            <h2 id="miniTitle">MINIGAME</h2>
-        </div>
-
-        <div id="miniContent"></div>
-
-    </section>
-
-
-    <!-- FINAL -->
-    <section id="ending" class="screen">
-
-        <div class="ending-box">
-
-            <div id="endingIcon">🏆</div>
-
-            <h1 id="endingTitle"></h1>
-
-            <p id="endingText"></p>
-
-            <div class="score-box">
-                <p>Jogador: <strong id="endingNick"></strong></p>
-                <p>Lado: <strong id="endingSide"></strong></p>
-                <p>Domínio da AURA: <strong id="endingDomination"></strong></p>
             </div>
 
-            <button class="big-button" onclick="location.reload()">
-                🔄 JOGAR NOVAMENTE
+            <div class="money">
+                $
+                <span id="money">
+                    2,500
+                </span>
+            </div>
+
+        </div>
+
+
+        <div class="hud-right">
+
+            <div class="wanted">
+
+                <span>PROCURADO</span>
+
+                <div id="stars">
+                    ☆ ☆ ☆ ☆ ☆
+                </div>
+
+            </div>
+
+            <div class="clock">
+                <span id="clock">
+                    12:00
+                </span>
+            </div>
+
+        </div>
+
+
+        <!-- MISSÃO -->
+
+        <div id="missionBox">
+
+            <div class="mission-label">
+                MISSÃO
+            </div>
+
+            <div id="missionTitle">
+                Explore a cidade
+            </div>
+
+            <div id="missionDescription">
+                Encontre seu primeiro veículo.
+            </div>
+
+        </div>
+
+
+        <!-- VEÍCULO -->
+
+        <div id="vehicleHUD">
+
+            <div class="vehicle-name">
+                VEÍCULO
+            </div>
+
+            <div class="speed">
+                <span id="speed">
+                    0
+                </span>
+
+                <small>KM/H</small>
+            </div>
+
+            <div class="fuel-container">
+
+                <span>COMBUSTÍVEL</span>
+
+                <div class="fuel-bar">
+                    <div id="fuel"></div>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- MINIMAPA -->
+
+        <div id="minimap">
+
+            <canvas id="mapCanvas"
+                    width="180"
+                    height="180">
+            </canvas>
+
+            <div class="map-player">
+                ●
+            </div>
+
+        </div>
+
+
+        <!-- NOTIFICAÇÕES -->
+
+        <div id="notifications"></div>
+
+    </div>
+
+
+    <!-- =========================
+         PAUSA
+    ========================== -->
+
+    <div id="pause">
+
+        <div class="pause-box">
+
+            <h1>PAUSADO</h1>
+
+            <button id="resume">
+                CONTINUAR
+            </button>
+
+            <button id="save">
+                SALVAR JOGO
+            </button>
+
+            <button id="exit">
+                MENU PRINCIPAL
             </button>
 
         </div>
 
-    </section>
+    </div>
 
-</div>
 
-<script src="script.js"></script>
+    <script src="script.js"></script>
 
 </body>
 </html>
